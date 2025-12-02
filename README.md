@@ -207,29 +207,6 @@ func (s *OVALScanner) executeProcessTest(ctx context.Context, test ProcessTest) 
 - Windows-specific schema extensions
 - RFC3339 timestamp format
 
-## Security Notes
-
-- Requires elevated privileges for registry HKLM access
-- File permissions enforce access control
-- Results reflect current user context
-- No credentials stored in results
-
-## Troubleshooting
-
-### "Registry key not found"
-```
-Solution: Verify registry path exists on target Windows version
-```
-
-### "Access Denied"
-```
-Solution: Run as Administrator or adjust registry permissions
-```
-
-### "File not found"
-```
-Solution: Use absolute paths; verify file location on system
-```
 
 ## Contributing
 
@@ -253,9 +230,6 @@ MIT License - See LICENSE file
 - [SCAP Documentation](https://csrc.nist.gov/projects/security-content-automation-protocol)
 - [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks)
 
-## Author
-
-Created for enterprise security assessment and compliance automation.
 
 ## Support
 
