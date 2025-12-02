@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oval_definitions xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5"
+                   xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5">
+  <definitions>
+    <definition id="oval:windows:def:1" version="1" class="compliance">
+      <metadata>
+        <title>Windows 10 Security Baseline Check</title>
+        <description>Verify Windows 10 system meets security baseline requirements</description>
+      </metadata>
+      <criteria>
+        <criterion test_ref="oval:windows:tst:1" comment="Check Windows version"/>
+        <criterion test_ref="oval:windows:tst:2" comment="Check Defender exists"/>
+      </criteria>
+    </definition>
+
+    <definition id="oval:windows:def:2" version="1" class="vulnerability">
+      <metadata>
+        <title>Critical System Files Integrity Check</title>
+        <description>Verify integrity of critical Windows system files</description>
+      </metadata>
+      <criteria>
+        <criterion test_ref="oval:windows:tst:3" comment="kernel32.dll exists"/>
+        <criterion test_ref="oval:windows:tst:4" comment="ntdll.dll exists"/>
+      </criteria>
+    </definition>
+  </definitions>
+
+  <tests>
+    <registry_test id="oval:windows:tst:1" version="1">
+      <object object_ref="oval:windows:obj:1"/>
+      <state state_ref="oval:windows:ste:1"/>
+    </registry_test>
+
+    <registry_test id="oval:windows:tst:2" version="1">
+      <object object_ref="oval:windows:obj:2"/>
+      <state state_ref="oval:windows:ste:2"/>
+    </registry_test>
+
+    <file_test id="oval:windows:tst:3" version="1">
+      <object object_ref="oval:windows:obj:3"/>
+    </file_test>
+
+    <file_test id="oval:windows:tst:4" version="1">
+      <object object_ref="oval:windows:obj:4"/>
+    </file_test>
+  </tests>
+
+  <objects>
+    <registry_object id="oval:windows:obj:1" version="1">
+      <hive>HKEY_LOCAL_MACHINE</hive>
+      <key>Software\Microsoft\Windows NT\CurrentVersion</key>
+      <name>ProductName</name>
+    </registry_object>
+
+    <registry_object id="oval:windows:obj:2" version="1">
+      <hive>HKEY_LOCAL_MACHINE</hive>
+      <key>SOFTWARE\Microsoft\Windows Defender</key>
+      <name>DisableAntiSpyware</name>
+    </registry_object>
+
+    <file_object id="oval:windows:obj:3" version="1">
+      <path>C:\Windows\System32</path>
+      <filename>kernel32.dll</filename>
+    </file_object>
+
+    <file_object id="oval:windows:obj:4" version="1">
+      <path>C:\Windows\System32</path>
+      <filename>ntdll.dll</filename>
+    </file_object>
+  </objects>
+
+  <states>
+    <registry_state id="oval:windows:ste:1" version="1">
+      <value operation="pattern_match">Windows 10.*</value>
+    </registry_state>
+
+    <registry_state id="oval:windows:ste:2" version="1">
+      <value operation="equals">0</value>
+    </registry_state>
+  </states>
+</oval_definitions>
